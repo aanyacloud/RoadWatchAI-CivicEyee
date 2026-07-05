@@ -1,16 +1,374 @@
-# React + Vite
+<p align="center">
+  <img src="d:\BANNER.png" width="100%">
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">
+🚧 iRoadWatch AI
+</h1>
 
-Currently, two official plugins are available:
+<p align="center">
+AI-Powered Road Infrastructure Monitoring & Transparency Platform
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<p align="center">
 
-## React Compiler
+  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=black" />
+  <img src="https://img.shields.io/badge/TailwindCSS-38BDF8?logo=tailwind-css&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/License-MIT-green" />
+</p>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📖 Overview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**iRoadWatch AI** is an intelligent road infrastructure monitoring platform designed to improve road maintenance, citizen participation, and public transparency.
+
+The platform allows citizens to report road issues using **images**, **GPS-enabled location**, and **AI-assisted analysis**, while providing authorities with a centralized dashboard for complaint management, contractor monitoring, budget transparency, and real-time infrastructure analytics.
+
+By integrating AI, cloud technologies, interactive mapping, and multilingual support, the system promotes efficient maintenance, improved accountability, and safer transportation systems.
+
+---
+
+# ✨ Key Features
+
+### 🚧 Citizen Services
+
+- 📸 Image-based road issue reporting
+- 📍 Automatic GPS location capture
+- 📱 Offline complaint submission
+- 🌐 Hindi & English language support
+- 📋 Complaint history & tracking
+
+### 🤖 AI Features
+
+- AI-assisted road issue analysis
+- Smart complaint categorization
+- AI Chat Assistant
+- Intelligent road information retrieval
+
+### 🗺 Road Monitoring
+
+- Interactive live road map
+- Severity-based complaint visualization
+- Real-time monitoring dashboard
+- Road maintenance history
+
+### 🏛 Authority Dashboard
+
+- Real-time complaint management
+- Complaint prioritization
+- Resolution workflow
+- Road analytics
+- Maintenance monitoring
+
+### 💰 Transparency Portal
+
+- Contractor information
+- Engineer details
+- Budget allocation
+- Budget utilization
+- Inspection history
+- Maintenance records
+
+---
+
+# 🏗 System Architecture
+
+```
+                    Citizen
+                       │
+        ┌──────────────┴──────────────┐
+        │                             │
+ Report Road Issue              AI Assistant
+        │                             │
+        └──────────────┬──────────────┘
+                       │
+               GPS + Image Upload
+                       │
+                       ▼
+            Firebase Cloud Firestore
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+ Authority Dashboard   Road Map   Complaint Tracking
+        │              │              │
+        └──────────────┼──────────────┘
+                       │
+                Contractor Portal
+                       │
+                       ▼
+                Complaint Resolution
+```
+
+---
+
+# 🚀 Workflow
+
+```text
+Citizen Reports Issue
+        │
+        ▼
+Upload Image + GPS
+        │
+        ▼
+AI Analysis
+        │
+        ▼
+Complaint Stored in Firebase
+        │
+        ▼
+Authority Dashboard
+        │
+        ▼
+Road Monitoring Map
+        │
+        ▼
+Contractor Assignment
+        │
+        ▼
+Maintenance Work
+        │
+        ▼
+Complaint Resolved
+```
+
+---
+
+# 🛠 Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Frontend | React.js + Vite |
+| Styling | Tailwind CSS |
+| Database | Firebase Firestore |
+| Authentication | Firebase Authentication |
+| Maps | Leaflet.js |
+| Map Provider | OpenStreetMap |
+| Location | Geolocation API |
+| Programming | JavaScript |
+| Development | VS Code |
+| Version Control | Git & GitHub |
+
+---
+
+# 📂 Project Structure
+
+```
+RoadWatchAI/
+│
+├── public/
+├── src/
+│
+├── components/
+├── pages/
+├── services/
+├── hooks/
+├── utils/
+├── assets/
+│
+├── screenshots/
+├── README.md
+├── package.json
+└── vite.config.js
+```
+
+---
+
+# 📸 Application Screenshots
+
+## 🏠 Home Page
+
+![Home Page](image.png)
+---
+
+## 🚧 Report Issue
+
+![Report](![alt text](image-1.png))
+
+---
+
+## 📋 AI Detection
+
+![AI Detection](![alt text](image-2.png))
+
+---
+
+## 🗺 Live Road Monitoring
+
+![Road Map](![alt text](image-3.png))
+
+---
+
+## 🏛 Authority Dashboard
+
+![Dashboard](![alt text](image-5.png))
+
+---
+
+## 💰 Contractor Transparency
+
+![Contractor](![alt text](image-4.png))
+
+# Multilingual 
+
+![Multilingual ](![alt text](image-6.png))
+
+---
+
+# ⚙ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/aanyacloud/RoadWatchAI-CivicEyee.git
+```
+
+Move into the project
+
+```bash
+cd RoadWatchAI-CivicEyee
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start development server
+
+```bash
+npm run dev
+```
+
+---
+
+# 🔥 Core Modules
+
+- Citizen Portal
+- Complaint Management
+- AI Assistant
+- Authority Dashboard
+- Road Monitoring Map
+- Contractor Transparency
+- Budget Dashboard
+- Offline Synchronization
+- Multilingual Support
+
+---
+
+# 📊 Database Collections
+
+### complaints
+
+- Description
+- GPS Coordinates
+- Images
+- Severity
+- Status
+- Timestamp
+
+### road_metadata
+
+- Contractor
+- Engineer
+- Budget
+- Repair History
+- Inspection Records
+
+### authorities
+
+- Login
+- Authority Details
+- Administration
+
+---
+
+# 🎯 Project Highlights
+
+✅ AI-assisted road monitoring
+
+✅ GPS-enabled complaint reporting
+
+✅ Interactive GIS visualization
+
+✅ Real-time Firebase synchronization
+
+✅ Offline complaint support
+
+✅ Budget transparency
+
+✅ Contractor accountability
+
+✅ Multilingual accessibility
+
+✅ Citizen engagement
+
+---
+
+# 🚀 Future Enhancements
+
+- AI-based road damage severity estimation
+- Predictive road failure detection
+- AI maintenance scheduling
+- Government API integration
+- Mobile application deployment
+- Smart city analytics
+- RAG-powered AI Assistant
+- Push notifications
+- Analytics dashboard
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create your feature branch
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Commit changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push changes
+
+```bash
+git push origin feature/new-feature
+```
+
+5. Open a Pull Request
+
+---
+
+# 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+# 👩‍💻 Author
+
+**Chandni**
+
+B.Tech Computer Science & Engineering  
+IIIT Naya Raipur
+
+🔗 GitHub: https://github.com/aanyacloud
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub!
+
+It helps the project gain visibility and motivates further development.
