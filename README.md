@@ -181,40 +181,40 @@ RoadWatchAI/
 
 ## 🏠 Home Page
 
-![Home Page](image.png)
+![Home Page](screenshots/home.png)
 ---
 
 ## 🚧 Report Issue
 
-![Report](![alt text](image-1.png))
+![Report](screenshots/report.png)
 
 ---
 
 ## 📋 AI Detection
 
-![AI Detection](![alt text](image-2.png))
+![AI Detection](screenshots/ai%20-%20detection.png)
 
 ---
 
 ## 🗺 Live Road Monitoring
 
-![Road Map](![alt text](image-3.png))
+![Road Map](screenshots/roadmap.png)
 
 ---
 
 ## 🏛 Authority Dashboard
 
-![Dashboard](![alt text](image-5.png))
+![Dashboard](screenshots/authority.png)
 
 ---
 
 ## 💰 Contractor Transparency
 
-![Contractor](![alt text](image-4.png))
+![Contractor](screenshots/contractor.png)
 
 # Multilingual 
 
-![Multilingual ](![alt text](image-6.png))
+![Multilingual ](screenshots/multilingual.png)
 
 ---
 
@@ -358,7 +358,7 @@ This project is licensed under the MIT License.
 
 # 👩‍💻 Author
 
-**Chandni**
+**Aanya**
 
 B.Tech Computer Science & Engineering  
 IIIT Naya Raipur
