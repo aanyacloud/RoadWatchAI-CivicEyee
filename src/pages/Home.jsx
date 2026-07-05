@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+
+import {
+  Link,
+  useNavigate
+} from 'react-router-dom'
 
 import {
   MapContainer,
@@ -13,8 +17,6 @@ import L from 'leaflet'
 
 import { FaGlobe } from 'react-icons/fa'
 
-import { FiMoreVertical } from 'react-icons/fi'
-
 import { db } from '../firebase'
 
 import {
@@ -22,7 +24,7 @@ import {
   onSnapshot
 } from 'firebase/firestore'
 
-// Auto Recenter Map
+// AUTO RECENTER MAP
 function RecenterMap({ location }) {
 
   const map = useMap()
@@ -34,10 +36,26 @@ function RecenterMap({ location }) {
   }, [location, map])
 
   return null
+
 }
 
-// Severity Icons
+// FIX LEAFLET ICONS
+delete L.Icon.Default.prototype._getIconUrl
 
+L.Icon.Default.mergeOptions({
+
+  iconRetinaUrl:
+    'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+
+  iconUrl:
+    'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+
+  shadowUrl:
+    'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+
+})
+
+// SEVERITY ICONS
 const greenIcon = new L.Icon({
 
   iconUrl:
@@ -93,55 +111,163 @@ const redIcon = new L.Icon({
 export default function Home() {
 
   const navigate = useNavigate()
-  const [complaints, setComplaints] = useState([])
 
-  // Persistent Language
-  const [language, setLanguage] = useState(
-    localStorage.getItem('language') || 'en'
-  )
+  const [complaints, setComplaints] =
+    useState([])
 
-  const [showLanguageMenu, setShowLanguageMenu] = useState(false)
+  const [userLocation, setUserLocation] =
+    useState([22.5726, 88.3639])
 
-  const [showMenu, setShowMenu] = useState(false)
-  // Save Language
+  const [isOnline, setIsOnline] =
+    useState(navigator.onLine)
+
+  const [language, setLanguage] =
+    useState(
+      localStorage.getItem('language') ||
+      'en'
+    )
+
+  const [showLanguageMenu, setShowLanguageMenu] =
+    useState(false)
+
+  // SAVE LANGUAGE
   useEffect(() => {
 
-    localStorage.setItem('language', language)
+    localStorage.setItem(
+      'language',
+      language
+    )
 
   }, [language])
 
-  // User Location
-  const [userLocation, setUserLocation] = useState([
-    22.0797,
-    82.1409
-  ])
+  // ONLINE OFFLINE
+  useEffect(() => {
 
-  // Translations
-  const translations = {
+    const handleOnline = () =>
+      setIsOnline(true)
 
-    en: {
-      title: 'AI-Powered Road Transparency & Monitoring Platform',
-      subtitle:
-        'Monitor roads, report potholes, track public spending, and improve infrastructure accountability using AI.',
-      report: 'Report Issue',
-      map: 'Live Road Monitoring Map',
-      total: 'Total Complaints'
-    },
+    const handleOffline = () =>
+      setIsOnline(false)
 
-    hi: {
-      title: 'एआई आधारित सड़क पारदर्शिता और निगरानी प्लेटफॉर्म',
-      subtitle:
-        'सड़कों की निगरानी करें, गड्ढों की रिपोर्ट करें और सार्वजनिक खर्च को ट्रैक करें।',
-      report: 'समस्या दर्ज करें',
-      map: 'लाइव रोड मॉनिटरिंग मैप',
-      total: 'कुल शिकायतें'
+    window.addEventListener(
+      'online',
+      handleOnline
+    )
+
+    window.addEventListener(
+      'offline',
+      handleOffline
+    )
+
+    return () => {
+
+      window.removeEventListener(
+        'online',
+        handleOnline
+      )
+
+      window.removeEventListener(
+        'offline',
+        handleOffline
+      )
+
     }
+
+  }, [])
+
+  // TRANSLATIONS
+const translations = {
+
+  en: {
+
+    title:
+      'AI-Powered Road Transparency & Monitoring Platform',
+
+    subtitle:
+      'Monitor roads, report potholes, track complaints, and improve infrastructure accountability using AI.',
+
+    citizen:
+      'Citizen Portal',
+
+    authority:
+      'Authority Portal',
+
+    citizenDesc:
+      'Report road issues, monitor nearby road conditions, and track complaint progress in real time.',
+
+    authorityDesc:
+      'Monitor complaints, analyze severity, and resolve road infrastructure issues efficiently.',
+
+    enterPortal:
+      'Enter Portal',
+
+    authorityAccess:
+      'Authority Access',
+
+    map:
+      'Live Road Monitoring Map',
+
+    total:
+      'Total Complaints',
+
+    online:
+      'Online',
+
+    offline:
+      'Offline',
+
+    report:
+      'Report Issue'
+
+  },
+
+  hi: {
+
+    title:
+      'एआई आधारित सड़क पारदर्शिता और निगरानी प्लेटफॉर्म',
+
+    subtitle:
+      'सड़कों की निगरानी करें, गड्ढों की रिपोर्ट करें और शिकायतों को ट्रैक करें।',
+
+    citizen:
+      'नागरिक पोर्टल',
+
+    authority:
+      'प्राधिकरण पोर्टल',
+
+    citizenDesc:
+      'सड़क समस्याओं की रिपोर्ट करें, आसपास की सड़क स्थिति देखें और शिकायतों की प्रगति को ट्रैक करें।',
+
+    authorityDesc:
+      'शिकायतों की निगरानी करें, गंभीरता का विश्लेषण करें और सड़क अवसंरचना समस्याओं का समाधान करें।',
+
+    enterPortal:
+      'पोर्टल खोलें',
+
+    authorityAccess:
+      'प्राधिकरण प्रवेश',
+
+    map:
+      'लाइव रोड मॉनिटरिंग मैप',
+
+    total:
+      'कुल शिकायतें',
+
+    online:
+      'ऑनलाइन',
+
+    offline:
+      'ऑफलाइन',
+
+    report:
+      'रिपोर्ट करें'
 
   }
 
+}
   const t = translations[language]
 
-  // REALTIME Firebase Complaints
+  // FIREBASE REALTIME
   useEffect(() => {
 
     const unsubscribe = onSnapshot(
@@ -150,18 +276,18 @@ export default function Home() {
 
       (snapshot) => {
 
-        const complaintData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data()
-        }))
+        const complaintData =
+          snapshot.docs.map((doc) => ({
 
-        setComplaints(complaintData)
+            id: doc.id,
 
-      },
+            ...doc.data()
 
-      (error) => {
+          }))
 
-        console.error(error)
+        setComplaints(
+          complaintData
+        )
 
       }
 
@@ -171,7 +297,7 @@ export default function Home() {
 
   }, [])
 
-  // Detect User Location
+  // GEOLOCATION
   useEffect(() => {
 
     if (navigator.geolocation) {
@@ -181,15 +307,12 @@ export default function Home() {
         (position) => {
 
           setUserLocation([
+
             position.coords.latitude,
+
             position.coords.longitude
+
           ])
-
-        },
-
-        (error) => {
-
-          console.error(error)
 
         }
 
@@ -200,28 +323,50 @@ export default function Home() {
   }, [])
 
   return (
+
     <div className="min-h-screen bg-slate-950 text-white">
 
-      {/* Navbar */}
+      {/* NAVBAR */}
       <nav className="flex justify-between items-center px-8 py-5 border-b border-slate-800">
 
         <h1 className="text-3xl font-bold text-green-400">
+
           RoadWatch
+
         </h1>
 
         <div className="flex items-center gap-4 relative">
 
-          {/* Language Button */}
+          {/* ONLINE OFFLINE */}
+          <div
+            className={`px-4 py-2 rounded-full font-bold border ${
+              isOnline
+                ? 'bg-green-500/20 text-green-400 border-green-500'
+                : 'bg-red-500/20 text-red-400 border-red-500'
+            }`}
+          >
+
+            {isOnline
+              ? `🟢 ${t.online}`
+              : `🔴 ${t.offline}`}
+
+          </div>
+
+          {/* LANGUAGE BUTTON */}
           <button
             onClick={() =>
-              setShowLanguageMenu(!showLanguageMenu)
+              setShowLanguageMenu(
+                !showLanguageMenu
+              )
             }
             className="bg-slate-800 hover:bg-slate-700 p-3 rounded-full transition"
           >
+
             <FaGlobe size={20} />
+
           </button>
 
-          {/* Language Dropdown */}
+          {/* LANGUAGE MENU */}
           {showLanguageMenu && (
 
             <div className="absolute top-16 right-0 bg-slate-900 border border-slate-700 rounded-xl overflow-hidden shadow-2xl z-[9999] min-w-[140px]">
@@ -229,7 +374,6 @@ export default function Home() {
               <button
                 onClick={() => {
 
-                  localStorage.setItem('language', 'en')
                   setLanguage('en')
 
                   setShowLanguageMenu(false)
@@ -237,13 +381,14 @@ export default function Home() {
                 }}
                 className="block px-6 py-3 hover:bg-slate-800 w-full text-left"
               >
+
                 English
+
               </button>
 
               <button
                 onClick={() => {
 
-                  localStorage.setItem('language', 'hi')
                   setLanguage('hi')
 
                   setShowLanguageMenu(false)
@@ -251,42 +396,22 @@ export default function Home() {
                 }}
                 className="block px-6 py-3 hover:bg-slate-800 w-full text-left"
               >
+
                 हिंदी
+
               </button>
 
             </div>
 
           )}
 
-          {/* Contractor Details Button */}
-          <div className="relative">
-  <button
-    onClick={() => setShowMenu(!showMenu)}
-    className="bg-slate-800 hover:bg-slate-700 p-3 rounded-full transition text-white"
-  >
-    ⋮
-  </button>
-
-  {showMenu && (
-    <div className="absolute right-0 mt-2 bg-slate-900 border border-slate-700 rounded-lg overflow-hidden shadow-lg z-50 min-w-[180px]">
-      
-      <button
-        onClick={() => navigate('/contractors')}
-        className="block w-full text-left px-4 py-3 hover:bg-slate-800 text-white"
-      >
-        {language === 'hi'
-          ? 'कॉन्ट्रैक्टर विवरण'
-          : 'Contractor Details'}
-      </button>
-
-    </div>
-  )}
-</div>
-          {/* Report Button */}
+          {/* REPORT BUTTON */}
           <Link to="/report">
 
             <button className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-lg font-semibold transition">
+
               {t.report}
+
             </button>
 
           </Link>
@@ -295,30 +420,119 @@ export default function Home() {
 
       </nav>
 
-      {/* Hero */}
+      {/* HERO */}
       <section className="text-center py-20 px-6">
 
         <h2 className="text-6xl font-bold max-w-5xl mx-auto leading-tight">
+
           {t.title}
+
         </h2>
 
         <p className="text-slate-300 text-lg mt-6 max-w-2xl mx-auto">
+
           {t.subtitle}
+
         </p>
 
       </section>
 
-      {/* Map Section */}
+      {/* PORTAL CARDS */}
+      <section className="px-8 pb-16">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          {/* CITIZEN */}
+          <div
+            onClick={() =>
+              navigate('/user-home')
+            }
+            className="bg-slate-900 border border-slate-800 rounded-3xl p-10 cursor-pointer hover:border-cyan-500 hover:scale-105 transition shadow-2xl"
+          >
+
+            <div className="text-7xl mb-8">
+
+              👤
+
+            </div>
+
+            <h2 className="text-4xl font-bold text-cyan-400">
+
+              {t.citizen}
+
+            </h2>
+
+            <p className="text-slate-400 mt-6 leading-8 text-lg">
+
+  {t.citizenDesc}
+
+</p>
+
+<button
+  className="mt-8 bg-cyan-500 hover:bg-cyan-600 transition px-6 py-3 rounded-2xl font-bold text-lg"
+>
+
+  {t.enterPortal}
+
+</button>
+
+          </div>
+
+          {/* AUTHORITY */}
+          <div
+            onClick={() =>
+              navigate('/authority-login')
+            }
+            className="bg-slate-900 border border-slate-800 rounded-3xl p-10 cursor-pointer hover:border-yellow-500 hover:scale-105 transition shadow-2xl"
+          >
+
+            <div className="text-7xl mb-8">
+
+              🏛️
+
+            </div>
+
+            <h2 className="text-4xl font-bold text-yellow-400">
+
+              {t.authority}
+
+            </h2>
+
+            <p className="text-slate-400 mt-6 leading-8 text-lg">
+
+  {t.authorityDesc}
+
+</p>
+
+<button
+  className="mt-8 bg-yellow-500 hover:bg-yellow-600 transition px-6 py-3 rounded-2xl font-bold text-lg text-black"
+>
+
+  {t.authorityAccess}
+
+</button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* MAP */}
       <section className="px-8 pb-20">
 
         <div className="flex justify-between items-center mb-8">
 
           <h3 className="text-4xl font-bold">
+
             {t.map}
+
           </h3>
 
           <div className="text-slate-300">
+
             {t.total}: {complaints.length}
+
           </div>
 
         </div>
@@ -328,7 +542,10 @@ export default function Home() {
           <MapContainer
             center={userLocation}
             zoom={13}
-            style={{ height: '600px', width: '100%' }}
+            style={{
+              height: '600px',
+              width: '100%'
+            }}
           >
 
             <TileLayer
@@ -336,10 +553,10 @@ export default function Home() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {/* Auto Recenter */}
-            <RecenterMap location={userLocation} />
+            <RecenterMap
+              location={userLocation}
+            />
 
-            {/* Complaint Markers */}
             {complaints.map((complaint) => (
 
               <Marker
@@ -356,8 +573,11 @@ export default function Home() {
                 }
 
                 position={[
-                  complaint.latitude || userLocation[0],
-                  complaint.longitude || userLocation[1]
+                  complaint.latitude ||
+                    userLocation[0],
+
+                  complaint.longitude ||
+                    userLocation[1]
                 ]}
               >
 
@@ -372,15 +592,21 @@ export default function Home() {
                     />
 
                     <h3 className="font-bold text-lg mb-2">
+
                       {complaint.severity} Severity
+
                     </h3>
 
                     <p className="text-sm mb-2">
+
                       {complaint.description}
+
                     </p>
 
                     <p className="text-xs text-gray-600">
+
                       📍 {complaint.location}
+
                     </p>
 
                   </div>
@@ -398,5 +624,7 @@ export default function Home() {
       </section>
 
     </div>
+
   )
+
 }
