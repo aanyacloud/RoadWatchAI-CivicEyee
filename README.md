@@ -22,85 +22,91 @@ AI-Powered Road Infrastructure Monitoring & Transparency Platform
 
 ---
 
-## 📖 Overview
+# iRoadWatch AI
 
-**iRoadWatch AI** is an intelligent road infrastructure monitoring platform designed to improve road maintenance, citizen participation, and public transparency.
+AI-Powered Road Infrastructure Monitoring and Transparency Platform
 
-The platform allows citizens to report road issues using **images**, **GPS-enabled location**, and **AI-assisted analysis**, while providing authorities with a centralized dashboard for complaint management, contractor monitoring, budget transparency, and real-time infrastructure analytics.
+[Live Demo](https://roadwatchcs.netlify.app/) · [GitHub Repository](https://github.com/aanyacloud/RoadWatchAI-CivicEye)
 
-By integrating AI, cloud technologies, interactive mapping, and multilingual support, the system promotes efficient maintenance, improved accountability, and safer transportation systems.
+## Overview
 
----
+iRoadWatch AI is a civic-tech platform designed to improve road infrastructure monitoring, citizen reporting, and transparency in road maintenance.
 
-# ✨ Key Features
+The platform enables citizens to report road-related issues using images and location data, while providing authorities with tools for complaint management, road monitoring, contractor information, and infrastructure analytics.
 
-### 🚧 Citizen Services
+The system combines an interactive web interface, geospatial visualization, cloud services, and AI-assisted features to support a more structured approach to road issue reporting and maintenance.
 
-- 📸 Image-based road issue reporting
-- 📍 Automatic GPS location capture
-- 📱 Offline complaint submission
-- 🌐 Hindi & English language support
-- 📋 Complaint history & tracking
+## Key Features
 
-### 🤖 AI Features
+### Citizen Portal
+
+- Image-based road issue reporting
+- GPS-enabled location capture
+- Complaint submission and tracking
+- Complaint history
+- Hindi and English language support
+- Offline complaint submission
+
+### AI-Assisted Analysis
 
 - AI-assisted road issue analysis
-- Smart complaint categorization
-- AI Chat Assistant
-- Intelligent road information retrieval
+- Automated complaint categorization
+- AI-powered chat assistant
+- Road information retrieval
 
-### 🗺 Road Monitoring
+### Road Monitoring
 
-- Interactive live road map
-- Severity-based complaint visualization
-- Real-time monitoring dashboard
+- Interactive road map
+- Location-based complaint visualization
+- Severity-based issue visualization
 - Road maintenance history
+- Infrastructure monitoring
 
-### 🏛 Authority Dashboard
+### Authority Dashboard
 
-- Real-time complaint management
+- Complaint management
 - Complaint prioritization
 - Resolution workflow
 - Road analytics
 - Maintenance monitoring
 
-### 💰 Transparency Portal
+### Transparency
 
 - Contractor information
 - Engineer details
-- Budget allocation
-- Budget utilization
-- Inspection history
-- Maintenance records
+- Budget allocation and utilization
+- Inspection records
+- Maintenance history
 
----
+## System Architecture
 
-# 🏗 System Architecture
+```text
+                        Citizen
+                           |
+              +------------+------------+
+              |                         |
+        Report Road Issue          AI Assistant
+              |                         |
+              +------------+------------+
+                           |
+                    Image + GPS Data
+                           |
+                           v
+                 Firebase Firestore
+                           |
+              +------------+------------+
+              |            |            |
+         Authority      Road Map    Complaint
+         Dashboard                  Tracking
+              |            |            |
+              +------------+------------+
+                           |
+                  Contractor Portal
+                           |
+                           v
+                 Complaint Resolution
 
-```
-                    Citizen
-                       │
-        ┌──────────────┴──────────────┐
-        │                             │
- Report Road Issue              AI Assistant
-        │                             │
-        └──────────────┬──────────────┘
-                       │
-               GPS + Image Upload
-                       │
-                       ▼
-            Firebase Cloud Firestore
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
- Authority Dashboard   Road Map   Complaint Tracking
-        │              │              │
-        └──────────────┼──────────────┘
-                       │
-                Contractor Portal
-                       │
-                       ▼
-                Complaint Resolution
+
 ```
 
 ---
